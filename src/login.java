@@ -19,7 +19,7 @@ public class login {
             public void actionPerformed(ActionEvent e) {
                 String url = "jdbc:mysql://localhost:3306/ExamenTres";
                 String user = "root";
-                String password = "1234";
+                String password = "root";
 
 
                 try (Connection conn = DriverManager.getConnection(url, user, password)) {
@@ -32,17 +32,19 @@ public class login {
                     if (busquedaMySQL.next()) {
                         JOptionPane.showMessageDialog(null, "Credenciales correctas, ingresando...");
 
-                        JFrame frame = new JFrame("Iniciar Sesion");
-                        frame.setContentPane(new login().Plogin);
-                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        frame.setSize(500, 300);
-                        frame.setPreferredSize(new Dimension(500, 300));
-                        frame.setLocationRelativeTo(null);
-                        frame.pack();
-                        frame.setVisible(true);
-
                         JFrame loginFrame = (JFrame) SwingUtilities.getWindowAncestor(Plogin);
-                        loginFrame.dispose();
+                        if (loginFrame != null) {
+                            loginFrame.dispose();
+                        }
+
+                        JFrame menuFrame = new JFrame("Menu Principal");
+                        menuFrame.setContentPane(new menu().PMenu);
+                        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        menuFrame.setSize(500, 300);
+                        menuFrame.setPreferredSize(new Dimension(500, 300));
+                        menuFrame.setLocationRelativeTo(null);
+                        menuFrame.pack();
+                        menuFrame.setVisible(true);
 
                     } else {
                         JOptionPane.showMessageDialog(null, "Credenciales incorrectas, intentalo de nuevo");
